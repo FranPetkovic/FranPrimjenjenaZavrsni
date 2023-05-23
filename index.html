@@ -28,7 +28,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 25px;
+            flex-wrap: wrap;
         }
         button {
             background-color: #F2AF5C;
@@ -41,20 +42,13 @@
             font-size: 16px;
             border-radius: 5px;
         }
+        button:active {
+            transform: scale(1.05);
+        }
         #btn{
             background-color: #DB4155;
         }
-        textarea{
-            width: 40vw;
-            border: 2px #3279A6 solid;
-            padding: 0px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 24px;
-            background: #F8F8F8;
-        }
-
+        
         p{
             font-size: 36px;
             color: #3279A6;
@@ -70,6 +64,44 @@
             right: 0;
             margin: 5px;
         }
+        .outer{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: inherit;
+        }
+        label {
+            border: 2px #3279A6 solid;
+            background-color: #F8F8F8;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            height: 45px;
+            color: #3279A6;
+
+        }
+        
+        textarea {
+            height: 45px;
+            font-size: 36px;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            resize: none;
+            transform: translateY(-50%);
+            border: 0;
+            background: transparent;
+            text-align: center;
+            color: #3279A6;
+        }
+        textarea:focus {
+            outline: 0;
+        }
+        #out{
+            height: 50px;
+        }
     </style>
 </head>
 
@@ -77,19 +109,20 @@
 
     <h1>Minimizacija Logičkih Sklopova</h1>
 
-    <textarea id="exp" readonly=""></textarea>
-
-    
-    <div class="gumbi">
-        <button id="btnA">A</button>
-        <button id="btnB">B</button>
-        <button id="btnIli">OR</button>
-        <button id="btnI">AND</button>
-        <button id="btnNeg">NOT</button>
-        <button id="btnZag1">( </button>
-        <button id="btnZag2"> )</button>
-        <button id="btnIzb"> Izbriši</button>
+    <div class="outer">
+        <label><textarea id="exp" readonly=""></textarea></label>
+        <div class="gumbi">
+            <button id="btnA">A</button>
+            <button id="btnB">B</button>
+            <button id="btnIli">OR</button>
+            <button id="btnI">AND</button>
+            <button id="btnNeg">NOT</button>
+            <button id="btnZag1">( </button>
+            <button id="btnZag2"> )</button>
+            <button id="btnIzb"> Izbriši</button>
+        </div>
     </div>
+
     <button id="btn">Minimiziraj</button>
 
     <p id="out"readonly=""></p>
