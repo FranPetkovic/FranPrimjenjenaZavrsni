@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+        body{
+            width: 100vw;
+            min-height:100vh ;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #F8F8F8;
+            gap: 15px;
+            font-family: Arial, sans-serif;
+        }
+        .gumbi{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        button {
+            background-color: #F2AF5C;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        #btn{
+            background-color: #DB4155;
+        }
+        textarea{
+            width: 40vw;
+            border: 2px #3279A6 solid;
+            padding: 0px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 24px;
+            background: #F8F8F8;
+        }
+
+        p{
+            font-size: 36px;
+            color: #3279A6;
+        }
+        h1{
+            color: #3279A6;
+            font-size: 48px;
+        }
+        .fran{
+            font-size: 18px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Minimizacija Logičkih Sklopova</h1>
+
+    <textarea id="exp" readonly=""></textarea>
+
+    
+    <div class="gumbi">
+        <button id="btnA">A</button>
+        <button id="btnB">B</button>
+        <button id="btnIli">OR</button>
+        <button id="btnI">AND</button>
+        <button id="btnNeg">NOT</button>
+        <button id="btnZag1">( </button>
+        <button id="btnZag2"> )</button>
+        <button id="btnIzb"> Izbrisi</button>
+    </div>
+    <button id="btn">Minimiziraj</button>
+
+    <p id="out"readonly=""></p>
+    <p class="fran"readonly="">Fran Petković</p>
+    
+    <script>
+        const exp = document.getElementById("exp");
+        const out = document.getElementById("out");
+
+        const outs =
+            [
+                '0',			
+                'a && b', 		/* 11 			AND 		*/
+                'a && !b', 		/* 10 			NOT, AND 	*/
+                'a', 			/* 10 11 					*/
+                '!a && b', 		/* 01 			NOT, AND 	*/
+                'b', 			/* 01 11 					*/
+                'a ^ b', 		/* 01 10 		XOR 		*/
+                'a || b', 		/* 01 10 11 	OR 			*/
+                '!(a || b)', 	/* 00 			NOR 		*/
+                '!a ^ b', 		/* 00 11 		XNOR 		*/
+                '!b', 			/* 00 10 		NOT 		*/
+                '!a || b', 		/* 00 01 11 	NOT, OR 	*/
+                '!a', 			/* 00 01 		NOT 		*/
+                'a || !b', 		/* 00 10 11 	NOT, OR 	*/
+                '!(a && b)', 	/* 00 01 10 	NAND 		*/
+                '1' 			
+            ];
+
+        function xpab(a, b) {
+            return eval(exp.value.toLowerCase());
+        }
+
+        btn.onclick = function () {
+            out.innerHTML = outs[(((((xpab(0, 0) << 1) | xpab(0, 1)) << 1) | xpab(1, 0)) << 1) | xpab(1, 1)].toUpperCase();
+        }
+        btnA.onclick = function () {
+            exp.value+="A";
+        }
+        btnB.onclick = function () {
+            exp.value+="B";
+        }
+        btnIli.onclick = function () {
+            exp.value+="||";
+        }
+        btnI.onclick = function () {
+            exp.value+="&&";
+        }
+        btnNeg.onclick = function () {
+            exp.value+="!";
+        }
+        btnZag1.onclick = function () {
+            exp.value+="(";
+        }
+        btnZag2.onclick = function () {
+            exp.value+=")";
+        }
+        btnIzb.onclick = function () {
+            exp.value="";
+        }
+    </script>
+
+</body>
+
+</html>
